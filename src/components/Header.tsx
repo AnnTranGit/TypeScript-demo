@@ -1,9 +1,20 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { RootState } from '../redux/store'
 
 type Props = {}
 
 const Header = (props: Props) => {
+    const { userLogin } = useSelector((state: RootState) => state.userReducer)
+    const renderLogin = () => {
+        if (userLogin) {
+            return <NavLink className="nav-link " to="/profile" aria-current="page">{userLogin.email}</NavLink>
+        }
+        return <NavLink className="nav-link " to="/login" aria-current="page">Login</NavLink>
+
+    }
+
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark text-white" >
             <NavLink className="navbar-brand" to="/">Shoes Shop</NavLink>
@@ -14,7 +25,9 @@ const Header = (props: Props) => {
                         <NavLink className="nav-link " to="/" aria-current="page">Home</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/login">Login</NavLink>
+                        <NavLink className="nav-link" to="/login">
+                            {renderLogin()}
+                        </NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/register">Register</NavLink>
