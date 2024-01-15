@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { AppDispatch } from '../store';
 import { UserSignInForm } from '../../pages/Login';
 import axios from 'axios';
-import { ACCESS_TOKEN, USER_LOGIN, saveStorage, saveStorageJson } from '../../util/config';
+import { ACCESS_TOKEN, USER_LOGIN, getStorageJson, saveStorage, saveStorageJson } from '../../util/config';
 
 export interface UserLogin {
     email: string,
@@ -13,7 +13,7 @@ export interface UserReducerState {
 }
 
 const initialState: UserReducerState = {
-    userLogin: null
+    userLogin: getStorageJson(USER_LOGIN)
 
 }
 
